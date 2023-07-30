@@ -85,7 +85,7 @@ class Database {
      * @param mysqli_stmt $stmt
      * @param mixed $values
      */
-    private function executeStatement(mysqli_stmt $stmt, mixed $values): void 
+    private function executeStatement(mysqli_stmt &$stmt, mixed $values): void 
     {
         $types = $this->determineTypes($values);
         $stmt->bind_param($types, ...$values);
@@ -120,7 +120,7 @@ class Database {
     {
         $sql = "SELECT * FROM $table WHERE $col=?" . (!empty($extraWhereSQL) ? ' AND ' . $extraWhereSQL : '');
         $stmt = $this->link->prepare($sql);
-        $this->executeStatement(&$stmt, $val);
+        $this->executeStatement($stmt, $val);
         $result = $stmt->get_result();
 
         return $result->fetch_assoc();
@@ -186,7 +186,7 @@ class Database {
                 . (!empty($extraSetSQL) ? ', ' . $extraSetSQL : '') . " WHERE $whereSQL" 
                 . (!empty($extraWhereSQL) ? ' AND ' . $extraWhereSQL : '');
         $stmt = $this->link->prepare($sql);
-        $this->executeStatement(&$stmt, $values);
+        $this->executeStatement($stmt, $values);
     
         $affectedRows = $stmt->affected_rows;
         $this->checkForError($affectedRows);
