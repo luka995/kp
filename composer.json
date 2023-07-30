@@ -1,0 +1,17 @@
+{
+    "name": "luka/kptest",
+    
+    "require" : 
+    {
+        "php" : ">=8.1",        
+        "maxmind/minfraud": "^1.23"
+    },
+    
+    "autoload" : 
+    {
+        "psr-4": 
+        {
+            "App\\": "src/"
+        }
+    }
+}
