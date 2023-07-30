@@ -20,6 +20,12 @@ Pratite ove korake kako bi instalirali i pokrenuli ovu aplikaciju na vašem loka
 4. U config.php fajlu možete uneti parametre za komunikaciju sa bazom podataka i MaxMind-om.
 5. Podrška samo za MySQL (koristi se "mysqli").
 
+## Baza
+
+- Ovaj projekat nema dump fajl baze. Možete napraviti bazu sa tabelama "user" i "user_log".
+- Tabela "user" treba da sadrži kolone: email|varchar(255), password|varchar(60), posted|datetime
+- Tabela "user_log" treba da sadrži kolone: action|varchar(255), user_id|int, log_time|datetime
+
 ## Korišćenje
 
 Ulazni fajl index.php
