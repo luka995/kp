@@ -2,7 +2,6 @@
 namespace App\Classes;
 
 use MinFraud;
-use MinFraud\Request;
 use Exception;
 
 /**
