@@ -23,17 +23,13 @@ class MaxMind implements MaxMindInterface {
         
         $config = include __DIR__ . '/../config.php';
 
-        $client = new MinFraud($config['maxmind']['account_id'], $config['maxmind']['license_key']);
-        $request = new Request([
-            'device' => [
-                'ip_address' => $ip,
-            ],
-            'email' => [
-                'address' => $email,
-            ],
-        ]);
-
-        $response = $client->score($request);
+        $client = new MinFraud($config['maxmind']['account_id'], $config['maxmind']['license_key']);                
+        
+        $response = $client->withDevice([
+                'ip_address'  => $ip,                
+                'accept_language' => 'en-US'])
+            ->withEmail($email)
+            ->score();        
 
         if ($response->riskScore > 80) {
             throw new Exception('User is maybe fraud.');
